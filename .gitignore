@@ -1,0 +1,15 @@
+# Secrets. Never commit your real API key.
+.env
+.env.*
+!.env.example
+
+# Runtime logs and generated reports (they can hold request IDs and error details)
+logs/
+reports/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
