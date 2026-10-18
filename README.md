@@ -141,6 +141,9 @@ Only the normal request should create a charge, and it is very small.
 Claude Haiku 5.5 costs $0.10 per million input tokens and $0.50 per million output tokens.
 I did not find a sentence in the docs that says failed requests are free. See `docs/sources.md`.
 
+Live results on 2026-10-18: all 4 tests passed (401, 404, 400, and 200).
+The three errors are written up in [`docs/case-studies/`](docs/case-studies/README.md).
+
 ## Design decisions
 
 - **Retries are off in `diagnose.py`.** The SDK retries 429 and 5xx twice by default. Turning retries off shows the first response and sends no extra requests.

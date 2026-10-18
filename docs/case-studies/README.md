@@ -7,10 +7,13 @@ I do not write a case study for an error that I did not reproduce.
 
 | Error | How it is verified | Case study |
 |---|---|---|
-| 401 authentication_error | Planned: live (fake key) | Not yet. Live tests have not been run. |
-| 404 not_found_error | Planned: live (model that does not exist) | Not yet. Live tests have not been run. |
-| 400 invalid_request_error | Planned: live (`max_tokens = -1`) | Not yet. Live tests have not been run. |
+| 401 authentication_error | Live, 2026-10-18 (fake key) | [01-401-authentication-error.md](01-401-authentication-error.md) |
+| 404 not_found_error | Live, 2026-10-18 (model that does not exist) | [02-404-model-not-found.md](02-404-model-not-found.md) |
+| 400 invalid_request_error | Live, 2026-10-18 (`max_tokens = -1`) | [03-400-invalid-max-tokens.md](03-400-invalid-max-tokens.md) |
 | 402, 403, 409, 413, 429, 500, 504, 529 | Mock tests only (`tests/test_classify.py`) | None. These were **not** reproduced with the real API. |
+
+Each live error was sent once with the CLI and once with `pytest -m live`, with retries off.
+A normal request (`claude-haiku-5-5`, `max_tokens = 16`) also returned 200 in both runs.
 
 Why some errors are mock-only:
 
