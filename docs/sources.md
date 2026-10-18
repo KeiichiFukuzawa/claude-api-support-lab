@@ -33,3 +33,7 @@ The docs page lists the main exception classes. I also read the installed SDK co
   The pricing page bills per input and output token.
   A request that the API rejects before the model runs should use no tokens.
   This is my assumption. I will check the Usage page in the Claude Console after the live tests.
+- Result (2026-10-18): after 8 live requests (6 errors, 2 successes with `claude-haiku-5-5`),
+  the Usage page in the Console showed no charge for this test.
+  The 2 successes used about 17 input and 4 output tokens each.
+  This does not prove that errors are always free. It only shows that this test cost too little to appear.
