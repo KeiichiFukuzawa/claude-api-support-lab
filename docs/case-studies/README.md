@@ -1,7 +1,11 @@
 # Case studies
 
-One file per error that I **reproduced with the real API**.
-I do not write a case study for an error that I did not reproduce.
+Two kinds of files:
+
+- **Live (01–03)**: errors that I **reproduced with the real API**.
+- **Simulated (04–06)**: hand-written from the official docs, with made-up request IDs. They are **not** reproductions. Each file says so on its first lines.
+
+I never call a simulated case a reproduction.
 
 ## Status
 
@@ -10,7 +14,10 @@ I do not write a case study for an error that I did not reproduce.
 | 401 authentication_error | Live, 2026-10-18 (fake key) | [01-401-authentication-error.md](01-401-authentication-error.md) |
 | 404 not_found_error | Live, 2026-10-18 (model that does not exist) | [02-404-model-not-found.md](02-404-model-not-found.md) |
 | 400 invalid_request_error | Live, 2026-10-18 (`max_tokens = -1`) | [03-400-invalid-max-tokens.md](03-400-invalid-max-tokens.md) |
-| 402, 403, 409, 413, 429, 500, 504, 529 | Mock tests only (`tests/test_classify.py`) | None. These were **not** reproduced with the real API. |
+| 429 rate limit | **Simulated** (docs + mock classification) | [04-429-rate-limit-simulated.md](04-429-rate-limit-simulated.md) |
+| 403 permission_error | **Simulated** | [05-403-permission-simulated.md](05-403-permission-simulated.md) |
+| 529 overloaded_error | **Simulated** | [06-529-overloaded-simulated.md](06-529-overloaded-simulated.md) |
+| 402, 409, 413, 500, 504 | Mock tests only (`tests/test_classify.py`) and `src/practice.py` | None. **Not** reproduced with the real API. |
 
 Each live error was sent once with the CLI and once with `pytest -m live`, with retries off.
 A normal request (`claude-haiku-5-5`, `max_tokens = 16`) also returned 200 in both runs.

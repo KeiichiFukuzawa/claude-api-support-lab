@@ -20,12 +20,13 @@ It shows how I:
 | `src/diagnose.py` | CLI. Sends one small Messages API request, explains the result, and writes a JSON Lines log. |
 | `src/escalate.py` | CLI. Turns one log record into an escalation report (Markdown). |
 | `src/error_catalog.py` | One shared table of errors: likely causes, next checks, what to ask the customer. |
+| `src/practice.py` | Offline practice. Shows a made-up ticket and log, you pick the category, then it shows the answer and a reply checklist. No API calls. |
 | `src/redact.py` | Hides API keys. Keeps only the length of the prompt. |
 | `tests/` | Mock tests (default) and live tests (opt-in). |
 | `docs/troubleshooting.md` | Status code table: symptom → causes → checks → fix → what to ask. |
 | `docs/escalation-report-template.md` | Report template and writing rules. |
 | `docs/reply-templates.md` | Customer reply samples (401, 429, 400, incident). |
-| `docs/case-studies/` | Errors that I reproduced with the real API. |
+| `docs/case-studies/` | 3 errors reproduced with the real API (01–03) and 3 simulated cases (04–06, labeled). |
 | `docs/sources.md` | The official docs I checked, with URLs. |
 | `docs/pre-publish-checklist.md` | How to check for keys and personal data before publishing. |
 | `docs/interview-notes.md` | Short facts about this project for interviews. |
@@ -121,7 +122,19 @@ python -m src.escalate \
 Facts (status, request ID, time, model, steps to reproduce) come from the log.
 Things only a person knows come from the options. Missing parts show `TODO`.
 
-### 3. Run the tests
+### 3. Practice (offline)
+
+```bash
+python -m src.practice              # random case, quiz
+python -m src.practice --seed 3     # same case every time
+python -m src.practice --list       # all cases
+python -m src.practice --lang ja    # Japanese only
+python -m src.practice --show       # ticket and answer, no quiz
+```
+
+The cases are made up. They are not real customer cases.
+
+### 4. Run the tests
 
 ```bash
 pytest              # mock tests only. No API calls, no cost.
@@ -181,6 +194,8 @@ API エラーの「切り分け」「文書化」「エスカレーション」�
 
 - `src/diagnose.py`: API に小さなリクエストを1回だけ送ります。エラーの分類、想定原因、次に確認すること、request-id を表示し、ログに残します。キーとプロンプト本文は残しません。
 - `src/escalate.py`: ログから、エンジニア向けのエスカレーション報告書を作ります。事実と推測は分けて書きます。
+- `src/practice.py`: APIを使わない練習モードです。架空のチケットとログを読み、原因の分類を選び、答えと返信チェックリストを見ます。
+- 事例集: 実機で再現した3件と、ドキュメントを元にした「シミュレーション」3件(429・403・529)があります。シミュレーションは再現ではないと明記しています。
 - テスト: 通常はモックだけで動きます(費用なし)。実 API を使うテストは `pytest -m live` のときだけ動きます。
 - 429 と 529 は、大量のリクエストで起こすことはしません。モックで検証しています。
 - **実務のサポート経験の代わりになるものではありません。**
