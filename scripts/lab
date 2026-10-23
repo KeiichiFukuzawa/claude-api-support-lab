@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# Short command for daily use. No need to activate .venv.
+#
+#   scripts/lab test                      -> pytest (mock tests)
+#   scripts/lab diagnose [options]        -> python -m src.diagnose
+#   scripts/lab escalate [options]        -> python -m src.escalate
+#   scripts/lab practice [options]        -> python -m src.practice
+
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+PY="$ROOT/.venv/bin/python"
+
+if [ ! -x "$PY" ]; then
+  echo "Not set up yet. Run: bash $ROOT/scripts/setup.sh" >&2
+  exit 2
+fi
+
+cd "$ROOT"
+cmd="${1:-help}"
+shift || true
+
+case "$cmd" in
+  test) exec "$PY" -m pytest "$@" ;;
+  diagnose | escalate | practice) exec "$PY" -m "src.$cmd" "$@" ;;
+  *)
+    echo "Usage: scripts/lab {test|diagnose|escalate|practice} [options]" >&2
+    exit 2
+    ;;
+esac
