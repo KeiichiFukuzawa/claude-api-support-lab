@@ -34,6 +34,28 @@ It shows how I:
 ## Setup
 
 You need Python 3.11 or newer.
+On macOS, the built-in Python (3.9) is too old. Install the latest one from https://www.python.org/downloads/ first.
+
+### Quick setup (macOS and Linux)
+
+```bash
+git clone https://github.com/KeiichiFukuzawa/claude-api-support-lab.git ~/claude-api-support-lab
+bash ~/claude-api-support-lab/scripts/setup.sh
+```
+
+The script finds Python 3.11+, makes `.venv`, installs the project, runs the mock tests,
+and sends one free request with a fake key (expect 401). It never asks for your API key.
+
+After that, use the `lab` command. You do not need to activate `.venv`:
+
+```bash
+~/claude-api-support-lab/scripts/lab test
+~/claude-api-support-lab/scripts/lab practice
+~/claude-api-support-lab/scripts/lab diagnose --scenario bad-model
+~/claude-api-support-lab/scripts/lab escalate
+```
+
+### Manual setup
 
 ```bash
 git clone https://github.com/KeiichiFukuzawa/claude-api-support-lab.git
